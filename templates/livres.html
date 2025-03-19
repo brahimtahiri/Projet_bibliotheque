@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+<!-- Bloc du contenu <title> -->
+{% block title %}Liste un livre - Bibliothèque{% endblock %}
+
+<!-- Bloc du contenu <main> -->
+{% block main %}
+<h3>Liste des livres :</h3>
+<a href="{{ url_for('register_livre') }}" class="btn btn-primary">Enregistrer un livre</a>
+
+{% if livres|length > 0 %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Auteur</th>
+      <th scope="col">Année de publication</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Disponibilité</th>
+      <th scope="col">Quantité en stock</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for livre in livres %}
+    <tr>
+      <td>{{ livre[0] }}</td>
+      <td>{{ livre[1] }}</td>
+      <td>{{ livre[2] }}</td>
+      <td>{{ livre[3] }}</td>
+      <td>{{ livre[4] }}</td>
+      <td>{% if livre[5] == 1 %} Disponible {% else %} Non disponible {% endif %}</td>
+      <td>{{ livre[6] }}</td>
+      <td><a href="{{ url_for('delete_livre', id=livre[0]) }}" class="btn btn-danger">Supprimer</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-primary" role="alert">Aucun livre trouvé.</div>
+{% endif %}
+
+<br />
+
+{% endblock %}

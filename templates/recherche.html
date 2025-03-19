@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+<!-- Bloc du contenu <title> -->
+{% block title %}Rechercher un livre - Bibliothèque{% endblock %}
+
+<!-- Bloc du contenu <main> -->
+{% block main %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Auteur</th>
+      <th scope="col">Année de publication</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Disponibilité</th>
+      <th scope="col">Quantité en stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for livre in livres %}
+    <tr>
+      <td>{{ livre[0] }}</td>
+      <td>{{ livre[1] }}</td>
+      <td>{{ livre[2] }}</td>
+      <td>{{ livre[3] }}</td>
+      <td>{{ livre[4] }}</td>
+      <td>{{ livre[5] }}</td>
+      <td>{{ livre[6] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

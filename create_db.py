@@ -2,19 +2,28 @@ import sqlite3
 
 connection = sqlite3.connect('database.db')
 
-with open('schema.sql') as f:
-    connection.executescript(f.read())
+with open('schema.sql') as file:
+    connection.executescript(file.read())
 
-cur = connection.cursor()
+livres = [
+    (1, 'Le Seigneur des Anneaux', 'J.R.R. Tolkien', 1954, 'Fantasy', True, 10),
+    (2, '1984', 'George Orwell', 1949, 'Dystopie', True, 8),
+    (3, 'Harry Potter à l\'école des sorciers', 'J.K. Rowling', 1997, 'Fantasy', True, 15),
+    (4, 'L\'Alchimiste', 'Paulo Coelho', 1988, 'Roman initiatique', True, 12),
+    (5, 'Les Misérables', 'Victor Hugo', 1862, 'Classique', True, 5),
+    (6, 'L\'Art de la guerre', 'Sun Tzu', -500, 'Philosophie', True, 7),
+    (7, 'Le Petit Prince', 'Antoine de Saint-Exupéry', 1943, 'Conte', True, 20),
+    (8, 'Don Quichotte', 'Miguel de Cervantes', 1605, 'Classique', True, 6),
+    (9, 'La Peste', 'Albert Camus', 1947, 'Roman existentialiste', True, 9),
+    (10, 'Fahrenheit 451', 'Ray Bradbury', 1953, 'Science-fiction', True, 11)
+]
 
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('DUPONT', 'Emilie', '123, Rue des Lilas, 75001 Paris'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('LEROUX', 'Lucas', '456, Avenue du Soleil, 31000 Toulouse'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('MARTIN', 'Amandine', '789, Rue des Érables, 69002 Lyon'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('TREMBLAY', 'Antoine', '1010, Boulevard de la Mer, 13008 Marseille'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('LAMBERT', 'Sarah', '222, Avenue de la Liberté, 59000 Lille'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('GAGNON', 'Nicolas', '456, Boulevard des Cerisiers, 69003 Lyon'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('DUBOIS', 'Charlotte', '789, Rue des Roses, 13005 Marseille'))
-cur.execute("INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?)",('LEFEVRE', 'Thomas', '333, Rue de la Paix, 75002 Paris'))
+query = '''INSERT INTO Livres (id_livre, titre, auteur, annee_publication, genre, disponible, quantite_stock)
+           VALUES (?, ?, ?, ?, ?, ?, ?)'''
+
+cursor = connection.cursor()
+
+cursor.executemany(query, livres)
 
 connection.commit()
 connection.close()

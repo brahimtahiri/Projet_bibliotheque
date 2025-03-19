@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+<!-- Bloc du contenu <title> -->
+{% block title %}Enregistrer un livre - Bibliothèque{% endblock %}
+
+<!-- Bloc du contenu <main> -->
+{% block main %}
+<a href="{{ url_for('livres') }}" class="btn btn-danger">Retour</a>
+
+<form action="{{ url_for('register_livre') }}" method="post">
+  <div class="form-group">
+    <label for="titre">Titre du livre</label>
+    <input type="text" class="form-control" id="titre" name="titre" />
+  </div>
+
+  <div class="form-group">
+    <label for="auteur">Auteur du livre</label>
+    <input type="text" class="form-control" id="auteur" name="auteur" />
+  </div>
+
+  <div class="form-group">
+    <label for="annee_publication">Année de publication</label>
+    <input type="number" class="form-control" id="annee_publication" name="annee_publication" />
+  </div>
+
+  <div class="form-group">
+    <label for="genre">Genre</label>
+    <input type="text" class="form-control" id="genre" name="genre" />
+  </div>
+
+  <div class="form-group">
+    <label for="genre">Quantité en stock</label>
+    <input type="number" class="form-control" id="quantite_stock" name="quantite_stock" />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Enregistrer le livre</button>
+</form>
+{% endblock %}
