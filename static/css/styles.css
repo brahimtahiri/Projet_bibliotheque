@@ -22,6 +22,11 @@ footer {
   padding: 2%;
 }
 
+.login_form {
+  margin-top: 10%;
+  margin-left: 8%;
+}
+
 .login_form,
 .form_register {
   width: 25%;

@@ -3,6 +3,20 @@
 <!-- Bloc du contenu <title> -->
 {% block title %}Connexion - Bibliothèque{% endblock %}
 
+<!-- Bloc du contenu pour le style -->
+{% block style %}
+<style>
+  body {
+    background-image: url("{{ url_for('static', filename='img/background.jpeg') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+  }
+</style>
+{% endblock %}
+
 <!-- Bloc du contenu <main> -->
 {% block main %}
 

@@ -12,9 +12,11 @@
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+    {% block style %}{% endblock %}
   </head>
   <body>
     <header>
+      {% if request.path != url_for('index') %}
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Bibliothèque</a>
@@ -44,6 +46,7 @@
           </div>
         </div>
       </nav>
+      {% endif %}
     </header>
     <main>{% block main %}{% endblock %}</main>
     <footer>
