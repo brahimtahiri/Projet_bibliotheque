@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-import sqlite3, bcrypt, datetime
+import sqlite3, datetime
 
 app = Flask(__name__)
 
@@ -29,7 +29,7 @@ def register_user():
         nom = request.form['nom']
         prenom = request.form['prenom']
         username = request.form['username']
-        password =  bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
+        password = ['password']
         type_utilisateur = request.form['type_utilisateur']
 
         cursor.execute('''INSERT INTO Utilisateurs (nom, prenom, username, password, type_utilisateur)

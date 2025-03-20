@@ -1,4 +1,4 @@
-import sqlite3, bcrypt
+import sqlite3
 
 connection = sqlite3.connect('database.db')
 cursor = connection.cursor()
@@ -23,9 +23,9 @@ cursor.executemany('''INSERT INTO Livres (id_livre, titre, auteur, annee_publica
            VALUES (?, ?, ?, ?, ?, ?, ?)''', books)
 
 users = [
-    (0, "Administrateur", "", "administrateur", bcrypt.hashpw("administrateur".encode('utf-8'), bcrypt.gensalt()), "administrator"),
-    (1, 'Martin', 'Claire', 'cmartin', bcrypt.hashpw("cmartin".encode('utf-8'), bcrypt.gensalt()), 'librarian'),
-    (2, 'Dupont', 'Jean', 'jdupont', bcrypt.hashpw("jdupont".encode('utf-8'), bcrypt.gensalt()), 'member'),
+    (0, "Administrateur", "", "administrateur", "administrateur", "administrator"),
+    (1, 'Martin', 'Claire', 'cmartin', "cmartin", 'librarian'),
+    (2, 'Dupont', 'Jean', 'jdupont', "jdupont", 'member'),
 ]
 
 cursor.executemany('''INSERT INTO Utilisateurs (id_utilisateur, nom, prenom, username, password, type_utilisateur)
