@@ -5,15 +5,34 @@
 
 <!-- Bloc du contenu <main> -->
 {% block main %}
-<form action="{{ url_for('login') }}" method="post">
-  <div class="form-group">
-    <label for="login">Identifiant</label>
-    <input type="text" class="form-control" id="login" />
+
+<div class="card login_form">
+  <img src="{{ url_for('static', filename='img/logo.jpg') }}" class="card-img-top" alt="Logo de la bibliothèque" />
+  <div class="card-body">
+    {% if authentication_error %}
+    <div class="alert alert-danger" role="alert">Identifiant ou mot de passe incorrect.</div>
+    {% endif %}
+
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill"></i>&nbsp;Erreur d'authentification</h4>
+      <p>
+        Le système d'authentification est défaillant.
+        <br />
+        Cliquez sur « Connexion » pour continuer...
+      </p>
+    </div>
+
+    <form action="{{ url_for('login') }}" method="post">
+      <div class="form-group">
+        <label for="login">Identifiant</label>
+        <input type="text" class="form-control" id="login" disabled />
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" class="form-control" id="password" disabled />
+      </div>
+      <button type="submit" class="btn btn-primary">Connexion</button>
+    </form>
   </div>
-  <div class="form-group">
-    <label for="password">Mot de passe</label>
-    <input type="password" class="form-control" id="password" />
-  </div>
-  <button type="submit" class="btn btn-primary">Connexion</button>
-</form>
+</div>
 {% endblock %}

@@ -14,9 +14,9 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
     id_utilisateur INTEGER PRIMARY KEY AUTOINCREMENT,
     nom TEXT NOT NULL,
     prenom TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    mot_de_passe TEXT NOT NULL,
-    type_utilisateur TEXT CHECK(type_utilisateur IN ('membre', 'bibliothécaire', 'administrateur')) NOT NULL
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    type_utilisateur TEXT CHECK(type_utilisateur IN ('administrator', 'librarian', 'member')) NOT NULL
 );
 
 -- Table Emprunts
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS Emprunts (
     date_emprunt DATE NOT NULL,
     date_retour_prevu DATE NOT NULL,
     date_retour_effectif DATE,
-    etat_emprunt TEXT CHECK(etat_emprunt IN ('en cours', 'retourné', 'en retard')) DEFAULT 'en cours',
+    etat_emprunt TEXT CHECK(etat_emprunt IN ('ongoing', 'returned', 'overdue')) DEFAULT 'ongoing',
     FOREIGN KEY (id_utilisateur) REFERENCES Utilisateurs(id_utilisateur) ON DELETE CASCADE,
     FOREIGN KEY (id_livre) REFERENCES Livres(id_livre) ON DELETE CASCADE
 );

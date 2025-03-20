@@ -1,3 +1,33 @@
+html,
 body {
-  padding: 2.5%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  text-align: center;
+}
+
+main,
+footer {
+  padding: 2%;
+}
+
+.login_form,
+.form_register {
+  width: 25%;
+}
+
+.login_form button,
+.form_register button {
+  margin-top: 2%;
 }

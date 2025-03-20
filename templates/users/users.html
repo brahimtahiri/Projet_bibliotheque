@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+<!-- Bloc du contenu <title> -->
+{% block title %}Liste des utilisateurs - Bibliothèque{% endblock %}
+
+<!-- Bloc du contenu <main> -->
+{% block main %}
+<h3>Liste des utilisateurs :</h3>
+<a href="{{ url_for('register_user') }}" class="btn btn-primary">Ajouter un utilisateur</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">Identifiant de connexion</th>
+      <th scope="col">Rôle</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for utilisateur in utilisateurs %}
+    <tr>
+      <td>{{ utilisateur[0] }}</td>
+      <td>{{ utilisateur[1] }}</td>
+      <td>{{ utilisateur[2] }}</td>
+      <td>{{ utilisateur[3] }}</td>
+      <td>
+        {% if utilisateur[4] == 'administrator' %} Administrateur {% elif utilisateur[4] == 'librarian' %} Bibliothécaire {% elif utilisateur[4] ==
+        'member' %} Membre {% endif %}
+      </td>
+      <td>
+        {% if utilisateur[0] != 0 %}
+        <a href="{{ url_for('delete_user', id=utilisateur[0]) }}" class="btn btn-danger">Supprimer</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<br />
+
+{% endblock %}

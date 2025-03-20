@@ -1,11 +1,12 @@
-import sqlite3
+import sqlite3, bcrypt
 
 connection = sqlite3.connect('database.db')
+cursor = connection.cursor()
 
 with open('schema.sql') as file:
     connection.executescript(file.read())
 
-livres = [
+books = [
     (1, 'Le Seigneur des Anneaux', 'J.R.R. Tolkien', 1954, 'Fantasy', True, 10),
     (2, '1984', 'George Orwell', 1949, 'Dystopie', True, 8),
     (3, 'Harry Potter à l\'école des sorciers', 'J.K. Rowling', 1997, 'Fantasy', True, 15),
@@ -18,12 +19,18 @@ livres = [
     (10, 'Fahrenheit 451', 'Ray Bradbury', 1953, 'Science-fiction', True, 11)
 ]
 
-query = '''INSERT INTO Livres (id_livre, titre, auteur, annee_publication, genre, disponible, quantite_stock)
-           VALUES (?, ?, ?, ?, ?, ?, ?)'''
+cursor.executemany('''INSERT INTO Livres (id_livre, titre, auteur, annee_publication, genre, disponible, quantite_stock)
+           VALUES (?, ?, ?, ?, ?, ?, ?)''', books)
 
-cursor = connection.cursor()
+users = [
+    (0, "Administrateur", "", "administrateur", bcrypt.hashpw("administrateur".encode('utf-8'), bcrypt.gensalt()), "administrator"),
+    (1, 'Martin', 'Claire', 'cmartin', bcrypt.hashpw("cmartin".encode('utf-8'), bcrypt.gensalt()), 'librarian'),
+    (2, 'Dupont', 'Jean', 'jdupont', bcrypt.hashpw("jdupont".encode('utf-8'), bcrypt.gensalt()), 'member'),
+]
 
-cursor.executemany(query, livres)
+cursor.executemany('''INSERT INTO Utilisateurs (id_utilisateur, nom, prenom, username, password, type_utilisateur)
+                      VALUES (?, ?, ?, ?, ?, ?)''', users)
+
 
 connection.commit()
 connection.close()

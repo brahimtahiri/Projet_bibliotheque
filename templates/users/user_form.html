@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+<!-- Bloc du contenu <title> -->
+{% block title %}Ajouter un utilisateur - Bibliothèque{% endblock %}
+
+<!-- Bloc du contenu <main> -->
+{% block main %}
+<div class="form_register">
+  <h3>Ajouter un utilisateur :</h3>
+
+  <form action="{{ url_for('register_user') }}" method="post">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input type="text" class="form-control" id="nom" name="nom" required />
+    </div>
+
+    <div class="form-group">
+      <label for="prenom">Prénom</label>
+      <input type="text" class="form-control" id="prenom" name="prenom" required />
+    </div>
+
+    <div class="form-group">
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" class="form-control" id="username" name="username" required />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input type="password" class="form-control" id="password" name="password" required />
+    </div>
+
+    <div class="form-group">
+      <label for="role">Rôle de l'utilisateur</label>
+      <select class="form-select" aria-label="Rôle de l'utilisateur" id="type_utilisateur" name="type_utilisateur">
+        <option value="member">Membre</option>
+        <option value="librarian">Bibliothécaire</option>
+        <option value="administrator">Administrateur</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter l'utilisateur</button>
+  </form>
+</div>
+{% endblock %}
